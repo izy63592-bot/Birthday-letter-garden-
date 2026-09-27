@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#234d38">
+<title>A Garden of Letters — Birthday Garden</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500;1,600&display=swap');
+
+:root{
+  --forest:#173d2b; --leaf:#2d6547; --sage:#a8c5a7; --cream:#fff8e9;
+  --paper:#fffdf6; --ink:#243128; --gold:#d6aa55; --rose:#df8f8a;
+  --shadow:0 20px 50px rgba(25,54,37,.16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:"DM Sans",sans-serif;background:#e8f0df;overflow-x:hidden}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.screen{min-height:100vh;position:relative}
+.hidden{display:none!important}
+
+/* Intro */
+#intro{
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 20px;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.8) 0 2px,transparent 3px),
+    radial-gradient(circle at 80% 15%,rgba(255,255,255,.65) 0 2px,transparent 3px),
+    linear-gradient(135deg,#183f2c,#376a4a 48%,#8cab76);
+  color:#fff;overflow:hidden;
+}
+#intro:before,#garden:before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background-image:
+    radial-gradient(ellipse at 10% 90%,rgba(255,255,255,.12),transparent 25%),
+    radial-gradient(ellipse at 90% 80%,rgba(255,255,255,.10),transparent 28%);
+}
+.intro-card{max-width:760px;position:relative;z-index:2}
+.eyebrow{letter-spacing:.24em;text-transform:uppercase;font-size:.72rem;opacity:.82}
+.intro-card h1{font:600 clamp(3.1rem,8vw,6.8rem)/.9 "Cormorant Garamond",serif;margin:28px 0 18px}
+.quote{font:italic 1.2rem/1.6 "Playfair Display",serif;max-width:620px;margin:0 auto 10px}
+.quote-author{opacity:.7;font-size:.85rem;margin-bottom:34px}
+.intro-sub{font:500 1.1rem;margin-bottom:30px}
+.enter-btn,.primary-btn{
+  border:0;background:#fff;color:var(--forest);padding:15px 25px;border-radius:999px;font-weight:700;
+  box-shadow:0 10px 30px rgba(0,0,0,.16);transition:.2s transform,.2s box-shadow
+}
+.enter-btn:hover,.primary-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.2)}
+.leaf{position:absolute;font-size:42px;opacity:.65;animation:float 7s ease-in-out infinite}
+.l1{left:8%;top:15%}.l2{right:10%;top:27%;animation-delay:1s}.l3{left:18%;bottom:15%;animation-delay:2s}.l4{right:18%;bottom:12%;animation-delay:3s}
+@keyframes float{50%{transform:translateY(-18px) rotate(7deg)}}
+
+/* Garden */
+#garden{background:linear-gradient(#dcebd0,#f7f1df 52%,#d6e6cf);padding-bottom:60px;min-height:100vh;position:relative}
+.navbar{position:sticky;top:0;z-index:20;background:rgba(255,253,246,.84);backdrop-filter:blur(15px);border-bottom:1px solid rgba(37,76,51,.12)}
+.nav-inner{max-width:1120px;margin:auto;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font:600 1.6rem "Cormorant Garamond",serif;color:var(--forest)}
+.nav-actions{display:flex;gap:8px;flex-wrap:wrap}
+.small-btn{border:1px solid rgba(37,76,51,.18);background:#fffdf6;color:var(--forest);border-radius:999px;padding:9px 13px;font-size:.82rem;font-weight:600}
+.small-btn:hover{background:#eef4e8}
+
+.hero{max-width:1000px;margin:0 auto;padding:55px 20px 25px;text-align:center;position:relative;z-index:1}
+.hero .tag{color:var(--leaf);font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.hero h2{font:600 clamp(3rem,7vw,5.6rem)/.9 "Cormorant Garamond",serif;color:var(--forest);margin:10px 0}
+.hero p{max-width:620px;margin:auto;color:#506353;line-height:1.65}
+
+.garden-bed{max-width:1100px;margin:25px auto 0;padding:20px;position:relative;z-index:1}
+.flower-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px}
+.flower-card{
+  position:relative;min-height:225px;border:0;background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(250,246,228,.9));
+  border-radius:30px;padding:25px 15px 20px;box-shadow:var(--shadow);overflow:hidden;
+  transition:transform .3s,box-shadow .3s;animation:bloom .65s both;
+}
+.flower-card:hover{transform:translateY(-8px) rotate(.3deg);box-shadow:0 28px 55px rgba(25,54,37,.2)}
+@keyframes bloom{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1)}}
+.flower-art{font-size:65px;line-height:1;filter:drop-shadow(0 8px 5px rgba(0,0,0,.12));animation:sway 4s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(4deg) translateY(-4px)}}
+.flower-title{font:600 1.55rem "Cormorant Garamond",serif;color:var(--forest);margin:10px 0 4px}
+.flower-meta{font-size:.74rem;color:#718071}
+.open-letter{margin-top:13px;background:var(--forest);color:white;border:0;border-radius:999px;padding:9px 15px;font-size:.75rem;font-weight:700}
+.add-card{border:2px dashed rgba(45,101,71,.3);background:rgba(255,255,255,.35);box-shadow:none;display:flex;flex-direction:column;justify-content:center;align-items:center;color:var(--leaf)}
+.add-card .plus{font-size:50px;line-height:1;font-weight:300}
+.ground{height:90px;margin-top:-5px;background:linear-gradient(transparent,#b5cf9e);border-radius:50% 50% 0 0;opacity:.55}
+
+/* Modal / letter */
+.overlay{position:fixed;inset:0;background:rgba(16,37,25,.6);backdrop-filter:blur(6px);z-index:50;display:flex;align-items:center;justify-content:center;padding:15px}
+.modal{width:min(900px,100%);max-height:94vh;overflow:auto;background:var(--paper);border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.3);position:relative}
+.close{position:absolute;right:16px;top:14px;width:38px;height:38px;border-radius:50%;border:0;background:#edf2e8;color:var(--forest);font-size:22px;z-index:3}
+.letter-view{padding:45px clamp(24px,7vw,75px) 30px}
+.letter-top{text-align:center;border-bottom:1px solid #e2e1d5;padding-bottom:25px}
+.flower-big{font-size:62px}
+.letter-top h3{font:600 clamp(2.3rem,6vw,4.2rem)/.95 "Cormorant Garamond",serif;color:var(--forest);margin:8px 0}
+.byline{font-size:.82rem;color:#738070}
+.letter-body{font:400 1.08rem/1.9 "Playfair Display",serif;white-space:pre-wrap;margin:35px auto;max-width:700px}
+.letter-footer{text-align:center;color:#6e7d6e;font-size:.8rem}
+.letter-nav{display:flex;justify-content:space-between;gap:10px;padding:0 24px 25px}
+.nav-arrow{border:1px solid #d7dfd1;background:#f2f6ed;color:var(--forest);border-radius:999px;padding:11px 18px;font-weight:700}
+.nav-arrow:disabled{opacity:.35;cursor:not-allowed}
+
+/* Editor */
+.editor{padding:30px}
+.editor h3{font:600 2.4rem "Cormorant Garamond",serif;color:var(--forest);margin:0 0 20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:.75rem;text-transform:uppercase;letter-spacing:.09em;color:#647363;font-weight:700}
+input,textarea,select{border:1px solid #d8dfd3;background:#fbfcf7;border-radius:13px;padding:12px 13px;color:var(--ink);outline:none}
+input:focus,textarea:focus,select:focus{border-color:#719a76;box-shadow:0 0 0 3px rgba(113,154,118,.13)}
+textarea{min-height:280px;resize:vertical;line-height:1.7}
+.editor-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;flex-wrap:wrap}
+.danger{background:#fff0ef!important;color:#a33d38!important;border-color:#f1c9c5!important}
+
+/* Share */
+.share-box{padding:32px;text-align:center}
+.share-box h3{font:600 2.5rem "Cormorant Garamond",serif;color:var(--forest);margin:0 0 5px}
+.share-box p{color:#657465}
+.qr-wrap{width:220px;height:220px;margin:22px auto;padding:12px;background:#fff;border-radius:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(30,60,35,.12)}
+#qrcode img,#qrcode canvas{max-width:100%;height:auto}
+.copy-row{display:flex;gap:8px;max-width:650px;margin:auto}
+.copy-row input{flex:1}
+.note{font-size:.75rem;color:#7b8779;margin-top:12px}
+
+/* floating */
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:var(--forest);color:white;padding:11px 17px;border-radius:999px;opacity:0;pointer-events:none;transition:.3s;z-index:100;font-size:.82rem}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:#637363}
+@media(max-width:620px){
+  .nav-inner{align-items:flex-start}.brand{font-size:1.4rem}.nav-actions{justify-content:flex-end}
+  .nav-actions .small-btn{padding:8px 10px;font-size:.72rem}
+  .hero{padding-top:40px}.flower-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+  .flower-card{min-height:195px;padding:18px 8px}.flower-art{font-size:50px}.flower-title{font-size:1.3rem}
+  .form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.editor{padding:24px 18px}
+  .letter-body{font-size:1rem;line-height:1.8}.letter-nav{padding:0 15px 20px}
+  .copy-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<section id="intro" class="screen">
+  <div class="leaf l1">🍃</div><div class="leaf l2">🌿</div><div class="leaf l3">🍂</div><div class="leaf l4">🌱</div>
+  <div class="intro-card">
+    <div class="eyebrow">A small place for words that stayed</div>
+    <h1>A Garden of Letters</h1>
+    <div class="quote">“Some people leave your life quietly, but the spaces they leave behind can still teach you how much you cared.”</div>
+    
+    <div class="intro-sub">a garden of letters made just for you</div>
+    <button class="enter-btn" onclick="enterGarden()">Enter the Garden 🌷</button>
+  </div>
+</section>
+
+<section id="garden" class="screen hidden">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="brand">A Garden of Letters 🌿</div>
+      <div class="nav-actions">
+        <button class="small-btn" onclick="openEditor()">＋ New Letter</button>
+        <button class="small-btn" onclick="openShare()">↗ Share</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="tag">For someone worth celebrating</div>
+    <h2>Letters that bloom.</h2>
+    <p>Every flower holds a letter. Open one, move gently through the garden, and keep the words that matter close.</p>
+  </header>
+
+  <main class="garden-bed">
+    <div id="flowerGrid" class="flower-grid"></div>
+    <div class="ground"></div>
+  </main>
+</section>
+
+<!-- Letter viewer -->
+<div id="letterOverlay" class="overlay hidden">
+  <div class="modal">
+    <button class="close" onclick="closeModal('letterOverlay')">×</button>
+    <div id="letterView" class="letter-view"></div>
+    <div class="letter-nav">
+      <button id="prevBtn" class="nav-arrow" onclick="moveLetter(-1)">← Previous</button>
+      <div style="display:flex;gap:8px">
+        <button class="nav-arrow" onclick="editCurrent()">✎ Edit</button>
+      </div>
+      <button id="nextBtn" class="nav-arrow" onclick="moveLetter(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Editor -->
+<div id="editorOverlay" class="overlay hidden">
+  <div class="modal">
+    <button class="close" onclick="closeModal('editorOverlay')">×</button>
+    <div class="editor">
+      <h3 id="editorHeading">Plant a new letter 🌱</h3>
+      <div class="form-grid">
+        <div class="field"><label>Letter title</label><input id="fTitle" placeholder="e.g. For the days you felt alone"></div>
+        <div class="field"><label>Recipient</label><input id="fRecipient" placeholder="Who is this for?"></div>
+        <div class="field"><label>Sender</label><input id="fSender" placeholder="From whom?"></div>
+        <div class="field"><label>Flower</label>
+          <select id="fFlower">
+            <option>🌷 Tulip</option><option>🌸 Blossom</option><option>🌼 Daisy</option><option>🌻 Sunflower</option>
+            <option>🌹 Rose</option><option>🪻 Lavender</option><option>🌺 Hibiscus</option><option>🌱 Sprout</option>
+          </select>
+        </div>
+        <div class="field"><label>Letter font</label>
+          <select id="fFont">
+            <option value="Playfair Display">Playfair Display — classic</option>
+            <option value="Cormorant Garamond">Cormorant Garamond — elegant</option>
+            <option value="Georgia">Georgia — warm</option>
+            <option value="Arial">Arial — clean</option>
+            <option value="'Trebuchet MS'">Trebuchet — friendly</option>
+          </select>
+        </div>
+        <div class="field"><label>Text size</label>
+          <select id="fSize"><option value="16px">Small</option><option value="18px" selected>Medium</option><option value="21px">Large</option><option value="24px">Extra large</option></select>
+        </div>
+        <div class="field full"><label>Letter</label>
+          <textarea id="fBody" placeholder="Write as much as you want. This can be a long personalized birthday letter..."></textarea>
+        </div>
+      </div>
+      <div class="editor-actions">
+        <button id="deleteBtn" class="small-btn danger hidden" onclick="deleteCurrent()">Delete letter</button>
+        <button class="small-btn" onclick="closeModal('editorOverlay')">Cancel</button>
+        <button class="primary-btn" onclick="saveLetter()">Publish to Garden 🌸</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Share -->
+<div id="shareOverlay" class="overlay hidden">
+  <div class="modal">
+    <button class="close" onclick="closeModal('shareOverlay')">×</button>
+    <div class="share-box">
+      <h3>Share the garden 🌿</h3>
+      <p>Send this garden to someone special. The QR code points to the current page.</p>
+      <div class="qr-wrap"><div id="qrcode"></div></div>
+      <div class="copy-row"><input id="shareUrl" readonly><button class="primary-btn" onclick="copyShare()">Copy link</button></div>
+      <div class="note">Letters are saved in this browser. To make a shareable version with the letters included, use the “Export Garden” option below.</div>
+      <div style="margin-top:18px"><button class="small-btn" onclick="exportGarden()">💾 Export Garden</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY = "birthdayLetterGarden_v1";
+let letters = [];
+let currentIndex = 0;
+let editingIndex = null;
+
+const defaults = [
+  {
+    title:"For the version of you that kept going",
+    recipient:"You",
+    sender:"Someone who believes in you",
+    flower:"🌷",
+    font:"Playfair Display",
+    size:"18px",
+    body:"Happy Birthday.\\n\\nI hope you remember that not every person who walked away took something from you. Some goodbyes simply made room for a quieter kind of growing.\\n\\nThere may have been days when losing friends made the world feel smaller. But you are still here, carrying stories, lessons, and the parts of yourself that nobody else gets to define.\\n\\nToday, I hope you celebrate the person who kept becoming, even when some people stopped staying.\\n\\nMay this next chapter bring you people who choose you gently, friendships that feel like home, and enough small joys to make ordinary days beautiful.\\n\\nHappy Birthday. You deserve a garden that keeps blooming."
+  },
+  {
+    title:"A little reminder",
+    recipient:"You",
+    sender:"Your birthday garden",
+    flower:"🌼",
+    font:"Cormorant Garamond",
+    size:"21px",
+    body:"You do not have to measure your worth by the number of people who stayed.\\n\\nSome seasons are crowded. Some are quiet. Both are still seasons of your life.\\n\\nSo take your time. Grow at your own pace. Let the right people find you in the places where you are becoming yourself."
+  }
+];
+
+function load(){
+  try{ letters=JSON.parse(localStorage.getItem(KEY)) || []; }catch(e){letters=[]}
+  if(!letters.length) { letters=defaults; save(); }
+  render();
+}
+function save(){ localStorage.setItem(KEY,JSON.stringify(letters)); }
+function enterGarden(){ document.getElementById("intro").classList.add("hidden"); document.getElementById("garden").classList.remove("hidden"); window.scrollTo(0,0); }
+function render(){
+  const grid=document.getElementById("flowerGrid");
+  grid.innerHTML="";
+  letters.forEach((l,i)=>{
+    const card=document.createElement("article");
+    card.className="flower-card";
+    card.style.animationDelay=(i*.07)+"s";
+    const flower=l.flower || "🌸";
+    card.innerHTML=`<div class="flower-art">${flower}</div>
+      <div class="flower-title">${esc(l.title||"Untitled letter")}</div>
+      <div class="flower-meta">for ${esc(l.recipient||"someone special")}</div>
+      <button class="open-letter" onclick="openLetter(${i})">Open letter</button>`;
+    grid.appendChild(card);
+  });
+  const add=document.createElement("article");
+  add.className="flower-card add-card";
+  add.innerHTML=`<div class="plus">＋</div><div class="flower-title">Plant a letter</div><button class="open-letter" onclick="openEditor()">Add new</button>`;
+  grid.appendChild(add);
+}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+
+function openLetter(i){
+  currentIndex=i;
+  const l=letters[i];
+  const view=document.getElementById("letterView");
+  view.innerHTML=`<div class="letter-top">
+    <div class="flower-big">${l.flower||"🌸"}</div>
+    <h3>${esc(l.title||"Untitled letter")}</h3>
+    <div class="byline">To ${esc(l.recipient||"Someone special")} · From ${esc(l.sender||"Someone who cares")}</div>
+  </div>
+  <div class="letter-body" style="font-family:${cssFont(l.font)};font-size:${l.size||"18px"}">${esc(l.body||"")}</div>
+  <div class="letter-footer">Made with care, and a little room for flowers to grow. 🌿</div>`;
+  document.getElementById("letterOverlay").classList.remove("hidden");
+  document.getElementById("prevBtn").disabled=i<=0;
+  document.getElementById("nextBtn").disabled=i>=letters.length-1;
+}
+function cssFont(f){return f==="Arial"?"Arial, sans-serif":f==="Georgia"?"Georgia, serif":f==="Trebuchet MS"?"'Trebuchet MS', sans-serif":"'"+String(f).replaceAll("'","")+"', serif";}
+function moveLetter(dir){const n=currentIndex+dir;if(n>=0&&n<letters.length)openLetter(n)}
+function editCurrent(){openEditor(currentIndex);closeModal("letterOverlay")}
+function openEditor(index=null){
+  editingIndex=index;
+  document.getElementById("editorHeading").textContent=index===null?"Plant a new letter 🌱":"Edit your letter ✎";
+  document.getElementById("deleteBtn").classList.toggle("hidden",index===null);
+  const l=index===null?{title:"",recipient:"",sender:"",flower:"🌷 Tulip",font:"Playfair Display",size:"18px",body:""}:letters[index];
+  document.getElementById("fTitle").value=l.title||"";
+  document.getElementById("fRecipient").value=l.recipient||"";
+  document.getElementById("fSender").value=l.sender||"";
+  document.getElementById("fFlower").value=l.flower && !l.flower.includes(" ") ? l.flower : (l.flower||"🌷 Tulip");
+  document.getElementById("fFont").value=l.font||"Playfair Display";
+  document.getElementById("fSize").value=l.size||"18px";
+  document.getElementById("fBody").value=l.body||"";
+  document.getElementById("editorOverlay").classList.remove("hidden");
+}
+function saveLetter(){
+  const title=document.getElementById("fTitle").value.trim()||"A Birthday Letter";
+  const recipient=document.getElementById("fRecipient").value.trim()||"Someone special";
+  const sender=document.getElementById("fSender").value.trim()||"Someone who cares";
+  const flowerRaw=document.getElementById("fFlower").value;
+  const flower=flowerRaw.split(" ")[0];
+  const item={title,recipient,sender,flower,font:document.getElementById("fFont").value,size:document.getElementById("fSize").value,body:document.getElementById("fBody").value};
+  if(editingIndex===null){letters.push(item);currentIndex=letters.length-1;toast("Your letter bloomed into the garden 🌸")}
+  else {letters[editingIndex]=item;currentIndex=editingIndex;toast("Your letter was updated ✨")}
+  save();render();closeModal("editorOverlay");
+}
+function deleteCurrent(){
+  if(editingIndex===null)return;
+  if(confirm("Delete this letter from the garden?")){
+    letters.splice(editingIndex,1);save();render();closeModal("editorOverlay");toast("Letter removed from the garden.");
+  }
+}
+function closeModal(id){document.getElementById(id).classList.add("hidden")}
+function openShare(){
+  document.getElementById("shareOverlay").classList.remove("hidden");
+  const url=location.href;
+  document.getElementById("shareUrl").value=url;
+  makeQR(url);
+}
+function makeQR(url){
+  const q=document.getElementById("qrcode");q.innerHTML="";
+  const img=document.createElement("img");
+  img.alt="QR code for this garden";
+  img.src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(url);
+  img.onerror=()=>{q.innerHTML="<div style='font-size:.8rem;color:#657465'>QR code needs an internet connection to generate.</div>"};
+  q.appendChild(img);
+}
+async function copyShare(){
+  try{await navigator.clipboard.writeText(location.href);toast("Garden link copied 🌿")}
+  catch(e){document.getElementById("shareUrl").select();document.execCommand("copy");toast("Garden link copied 🌿")}
+}
+function exportGarden(){
+  const payload=btoa(unescape(encodeURIComponent(JSON.stringify(letters))));
+  const url=location.href.split("#")[0]+"#garden="+payload;
+  navigator.clipboard?.writeText(url);
+  toast("Shareable garden link copied ✨");
+}
+function importFromHash(){
+  if(location.hash.startsWith("#garden=")){
+    try{const data=decodeURIComponent(escape(atob(location.hash.slice(8))));const parsed=JSON.parse(data);if(Array.isArray(parsed)&&parsed.length){letters=parsed;save();}}
+    catch(e){}
+  }
+}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window._toast);window._toast=setTimeout(()=>t.classList.remove("show"),2300)}
+document.addEventListener("keydown",e=>{
+  if(document.getElementById("letterOverlay").classList.contains("hidden"))return;
+  if(e.key==="ArrowLeft")moveLetter(-1);
+  if(e.key==="ArrowRight")moveLetter(1);
+  if(e.key==="Escape")closeModal("letterOverlay");
+});
+importFromHash();load();
+</script>
+</body>
+</html>
